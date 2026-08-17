@@ -1,0 +1,154 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-rule: var(--rule);
+  --color-signal: var(--signal);
+  --font-display: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.375rem;
+  /* NYC subway map: paper cream, ink black, signal yellow */
+  --paper: oklch(0.985 0.005 95);
+  --ink: oklch(0.16 0.012 270);
+  --rule: oklch(0.88 0.008 95);
+  --signal: oklch(0.86 0.18 95); /* MTA caution yellow */
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: oklch(0.96 0.005 95);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.95 0.005 95);
+  --muted-foreground: oklch(0.45 0.01 270);
+  --accent: var(--signal);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--ink);
+}
+
+.dark {
+  --paper: oklch(0.15 0.01 270);
+  --ink: oklch(0.97 0.005 95);
+  --rule: oklch(0.28 0.01 270);
+  --signal: oklch(0.86 0.18 95);
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: oklch(0.18 0.01 270);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.18 0.01 270);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: oklch(0.22 0.01 270);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.22 0.01 270);
+  --muted-foreground: oklch(0.65 0.01 270);
+  --accent: var(--signal);
+  --accent-foreground: oklch(0.15 0.01 270);
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--ink);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-display);
+    font-feature-settings: "ss01", "cv11";
+  }
+}
+
+/* MTA-style subway line bullet */
+.line-bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Custom map pin */
+.network-pin {
+  width: 26px;
+  height: 26px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid var(--ink);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+.network-pin > span {
+  transform: rotate(45deg);
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  color: white;
+  line-height: 22px;
+}
+
+/* Brutal divider with tick like an MTA map */
+.tick-rule {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--rule) 0 4px,
+    transparent 4px 8px
+  );
+  height: 1px;
+  width: 100%;
+}
